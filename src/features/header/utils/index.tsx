@@ -5,6 +5,6 @@ export const getLayoutCSS = (selectedLayout: number) => {
 }
 
 export const getContainerCSS = (selectedLayout: number) => {
-  if (selectedLayout === 0) return `flex items-center justify-center space-x-2`
+  if (selectedLayout === 0) return `flex items-center justify-center space-x-3`
   return `flex flex-col items-start justify-center space-y-4`
 }

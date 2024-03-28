@@ -25,7 +25,10 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export const SupaBaseProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<IUser | null>(null)
+  const [user, setUser] = useState<IUser | null>({
+    email: 'amit',
+    uid: '123'
+  })
   const [loading, setLoading] = useState<Boolean>(true)
 
   const supaBaseSignIn = async (email: string, password: string) => {
