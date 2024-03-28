@@ -9,9 +9,7 @@ export const DefaultLayout = ({
 }>) => {
   return (
     <main className="flex flex-col h-screen w-screen space-y-2">
-      <Container className="border rounded-md border-gray-400">
-        {header}
-      </Container>
+      <Container>{header}</Container>
       <Container>{children}</Container>
     </main>
   )

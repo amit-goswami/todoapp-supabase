@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import toast from 'react-hot-toast'
 import { Loader } from '@/components'
 import { THEME } from '@/shared/shared.interface'
 
@@ -29,6 +30,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       setTheme((prev) => (prev === THEME.LIGHT ? THEME.DARK : THEME.LIGHT))
       setLoading(false)
     }, 400)
+    toast.success('Theme changed successfully')
   }
 
   return (

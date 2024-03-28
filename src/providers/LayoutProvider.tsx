@@ -37,6 +37,7 @@ export const LayoutProvider = ({ children }: { children: ReactNode }) => {
           setLoading(false)
         }, 100)
       }, 100)
+      toast.success('Layout changed successfully')
     } catch (error) {
       toast.error('Failed to change layout')
     }
