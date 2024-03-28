@@ -1,11 +1,12 @@
 'use client'
 
+import useAppStore from '@/store/app.store'
 import { Container, Modal } from '@/components'
 import { TaskCards } from './task-cards'
 import { TaskType } from './task-type'
 import { useLayout } from '@/providers/LayoutProvider'
 import { getCardsContainerHeight } from './utils'
-import useAppStore from '@/store/app.store'
+import { AddTodoForm } from './add-todo-form'
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
@@ -20,7 +21,7 @@ export const HomeContainer = () => {
         <TaskType text="In Complete" varient="pending" />
       </Container>
       <Container
-        className={`flex flex-wrap justify-start items-center py-4 overflow-scroll ${getCardsContainerHeight(
+        className={`flex flex-wrap justify-center items-center py-4 overflow-scroll ${getCardsContainerHeight(
           selectedLayout
         )}`}
       >
@@ -31,7 +32,7 @@ export const HomeContainer = () => {
       <Modal
         isOpen={isAddTodoModalOpen}
         title="Add Todo"
-        content={<div>Test Content</div>}
+        content={<AddTodoForm />}
         onClose={() => setIsAddTodoModalOpen(false)}
       />
     </Container>

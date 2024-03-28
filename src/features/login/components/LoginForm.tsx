@@ -1,7 +1,6 @@
 import Joi from 'joi'
-import { Button } from '@/components'
-import { Form } from '@/components/molecules/form'
-import { FormInput } from '@/components/molecules/form/form-input'
+import useAppStore from '@/store/app.store'
+import { Button, Container, Text, Form, FormInput } from '@/components'
 import { useSupaBaseAuth } from '@/providers/SupaBaseProvider'
 
 const validationSchema = Joi.object({
@@ -12,11 +11,14 @@ const validationSchema = Joi.object({
 })
 
 export const LoginForm = () => {
-  const { supaBaseSignIn } = useSupaBaseAuth()
+  const { supaBaseSignUp, supaBaseSignIn } = useSupaBaseAuth()
+  const { isSignUpButtonClicked, setIsSignUpButtonClicked } = useAppStore()
 
   const getFormData = (data: Record<string, string | number | boolean>) => {
     const { email, password } = data as Record<string, string>
-    supaBaseSignIn(email, password)
+    isSignUpButtonClicked
+      ? supaBaseSignIn(email, password)
+      : supaBaseSignUp(email, password)
   }
   return (
     <Form
@@ -27,7 +29,20 @@ export const LoginForm = () => {
     >
       <FormInput label="Email" name="email" labelRequired />
       <FormInput label="Password" name="password" labelRequired />
-      <Button btnText="Login" type="submit" />
+      <Container className="flex justify-start items-center space-x-2">
+        <Button
+          btnText={`${isSignUpButtonClicked ? 'Sign Up' : 'Sign In'}`}
+          type="submit"
+        />
+        <Container
+          className="cursor-pointer"
+          onClick={() => setIsSignUpButtonClicked(!isSignUpButtonClicked)}
+        >
+          <Text as="p">{`${
+            isSignUpButtonClicked ? 'Already Registered?' : 'New User? Sign Up'
+          }`}</Text>
+        </Container>
+      </Container>
     </Form>
   )
 }
