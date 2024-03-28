@@ -3,31 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-color: #242424;
+  --text-color: #fff;
+  --button-background: #333333;
+  --button-text: #ccc;
+  --border-color: #333333;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.light-theme {
+  --background-color: #f0f0f0;
+  --text-color: #000;
+  --button-background: #ccc;
+  --button-text: #333;
+  --border-color: #ccc;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+nav {
+  background-color: var(--button-background);
+}
+
+button {
+  background-color: var(--button-background);
+  color: var(--button-text);
 }

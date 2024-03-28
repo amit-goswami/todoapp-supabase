@@ -11,3 +11,14 @@ export interface IUser {
   uid: string
   email: string
 }
+
+export enum LAYOUT {
+  LAYOUT = 'layout',
+  DEFAULT = 0,
+  CUSTOM = 1
+}
+
+export enum THEME {
+  LIGHT = 'light',
+  DARK = 'dark'
+}

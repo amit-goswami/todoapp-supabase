@@ -6,6 +6,8 @@ import { Toaster } from 'react-hot-toast'
 import { SupaBaseProvider } from '@/providers/SupaBaseProvider'
 import { ProtectedBoundary } from '@/templates/protected-boundary'
 import { Layouts } from '@/layouts'
+import { LayoutProvider } from '@/providers/LayoutProvider'
+import { ThemeProvider } from '@/providers/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,9 +27,13 @@ export default function RootLayout({
         <Toaster position="top-center" />
         <ErrorBoundary>
           <SupaBaseProvider>
-            <Layouts>
-              <ProtectedBoundary>{children}</ProtectedBoundary>
-            </Layouts>
+            <ThemeProvider>
+              <LayoutProvider>
+                <Layouts>
+                  <ProtectedBoundary {...{ children }} />
+                </Layouts>
+              </LayoutProvider>
+            </ThemeProvider>
           </SupaBaseProvider>
         </ErrorBoundary>
       </body>

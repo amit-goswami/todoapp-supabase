@@ -1,16 +1,16 @@
 'use client'
 
-import useAppStore from '@/store/app.store'
 import { DefaultLayout } from './default-layout'
 import { CustomLayout } from './custom-layout'
 import { HeaderContainer } from '@/features/header'
+import { useLayout } from '@/providers/LayoutProvider'
 
 export const Layouts = ({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) => {
-  const { selectedLayout } = useAppStore()
+  const { selectedLayout } = useLayout()
 
   const getSelectedLayout = (selectedLayout: number) => {
     switch (selectedLayout) {

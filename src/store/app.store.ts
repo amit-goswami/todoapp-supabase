@@ -1,13 +1,7 @@
 import { create } from 'zustand'
 
-type AppManagementState = {
-  selectedLayout: number
-  setSelectedLayout: (layout: number) => void
-}
+type AppManagementState = {}
 
-const useAppStore = create<AppManagementState>((set) => ({
-  selectedLayout: 0,
-  setSelectedLayout: (layout: number) => set({ selectedLayout: layout })
-}))
+const useAppStore = create<AppManagementState>((set) => ({}))
 
 export default useAppStore
