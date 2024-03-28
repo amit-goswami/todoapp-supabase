@@ -1,3 +1,5 @@
+import LoginButton from './login-button'
+import AddTodoButton from './add-todo'
 import { Button, Container, Text } from '@/components'
 import { useLayout } from '@/providers/LayoutProvider'
 import { getContainerCSS, getLayoutCSS } from './utils'
@@ -15,6 +17,8 @@ export const HeaderContainer = () => {
         <Text as="p">Todo App</Text>
         <Container className={`flex ${getContainerCSS(selectedLayout)}`}>
           <Button btnText="Switch Layout" onClick={() => changeLayout()} />
+          <AddTodoButton />
+          <LoginButton />
           <ThemeButton />
         </Container>
       </nav>

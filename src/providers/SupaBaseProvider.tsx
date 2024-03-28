@@ -9,7 +9,7 @@ import { createClient } from '@supabase/supabase-js'
 interface ISupaBaseContext {
   user: IUser | null
   loading: Boolean
-  supaBaseSignIn: () => void
+  supaBaseSignIn: (email: string, password: string) => void
   logOut: () => void
 }
 
@@ -28,21 +28,51 @@ export const SupaBaseProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null)
   const [loading, setLoading] = useState<Boolean>(true)
 
-  const supaBaseSignIn = async () => {
-    setUser(user)
+  const supaBaseSignIn = async (email: string, password: string) => {
+    try {
+      const { error, data } = await supabase.auth.signUp({
+        email,
+        password
+      })
+      if (data.user?.email) {
+        setUser({
+          uid: data.user.id,
+          email: data.user.email
+        })
+      }
+      if (error) {
+        throw error
+      }
+      toast.success(AUTH_MESSAGE.EMAIL_SENT)
+    } catch (error) {
+      toast.error(AUTH_MESSAGE.USER_LOGIN_FAILED)
+    }
   }
 
   const logOut = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      throw error
+    }
     setUser(null)
     toast.success(AUTH_MESSAGE.USER_LOGGED_OUT)
   }
 
-  const checkIsUserLoggedIn = () => {}
+  const checkIsUserLoggedIn = () =>
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user?.email) {
+        setUser({
+          uid: session.user.id,
+          email: session.user.email
+        })
+      }
+      setLoading(false)
+    })
 
   useEffect(() => {
     setLoading(false)
-    return () => checkIsUserLoggedIn()
-  }, [user])
+    checkIsUserLoggedIn()
+  }, [])
 
   return (
     <SupaBaseContext.Provider value={{ user, loading, supaBaseSignIn, logOut }}>

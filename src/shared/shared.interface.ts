@@ -4,7 +4,9 @@ export const ROUTES = {
 
 export enum AUTH_MESSAGE {
   USER_LOGGED_IN = 'User logged in successfully',
-  USER_LOGGED_OUT = 'User logged out successfully'
+  USER_LOGGED_OUT = 'User logged out successfully',
+  USER_LOGIN_FAILED = 'User login failed',
+  EMAIL_SENT = 'Email sent successfully'
 }
 
 export interface IUser {
